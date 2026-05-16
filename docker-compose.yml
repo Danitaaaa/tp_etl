@@ -1,0 +1,26 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: postgres_tp
+
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: tp_elt
+
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - ./csv:/csv
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin_tp
+
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin123
+
+    ports:
+      - "5050:80"
