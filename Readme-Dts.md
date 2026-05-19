@@ -70,22 +70,32 @@ Para crear la base de datos y levantar el contenedor se configura el archivo doc
 
 ### `docker-compose.yml`
 ```yaml
-version: '3.9'
-
 services:
   postgres:
-    image: postgres
-    container_name: postgre_practico_etl
-    restart: always
+    image: postgres:16
+    container_name: postgres_tp
+
     environment:
-      POSTGRES_USER: valentino
-      POSTGRES_PASSWORD: 0000
-      POSTGRES_DB: practico_etl
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: tp_elt
+
     ports:
       - "5432:5432"
+
     volumes:
       - ./csv:/csv
-      - ./initdb:/docker-entrypoint-initdb.d
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin_tp
+
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin123
+
+    ports:
+      - "5050:80"
 
 ```
 
